@@ -1,4 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:tasky/models/user_model.dart';
+import 'package:tasky/views/widgets/app_dialog_widget.dart';
+import 'package:tasky/views/widgets/firebase_authentication.dart';
+import 'package:tasky/views/widgets/firebase_result.dart';
 import 'package:tasky/views/widgets/text_form_field_widget.dart';
 import 'package:tasky/views/widgets/validator.dart';
 
@@ -100,8 +106,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(height: 5),
                     TextFormFieldWidget(
                       controller: confirmPasswordController,
-                      validator: (value) =>
-                          Validator.validateConfirmPassword(value, passwordController.text),
+                      validator: (value) => Validator.validateConfirmPassword(
+                        value,
+                        passwordController.text,
+                      ),
                       hintText: 'Password...',
                       obscureText: true,
                       isPassword: true,
@@ -111,11 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () {
-                              if(formKey.currentState!.validate()) {
-                                Navigator.of(context).pushNamed('/home');
-                              }
-                            },
+                            onPressed: _registerOnPressed,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xff5F33E1),
                               padding: EdgeInsets.symmetric(
@@ -173,5 +177,33 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+  
+  void _registerOnPressed() async {
+    if (formKey.currentState!.validate()) {
+      AppDialogWidget.showLoading(context);
+      final result = await FirebaseAuthentication.register(
+        UserModel(
+          name: usernameController.text,
+          email: emailController.text,
+          password: passwordController.text,
+        ),
+      );
+      switch(result){
+        case FirebaseSuccess<UserModel>():
+          Navigator.of(context).pop();
+          usernameController.clear();
+          emailController.clear();
+          passwordController.clear();
+          confirmPasswordController.clear();
+          Navigator.of(context).pop();
+        case FirebaseError<UserModel>():
+          Navigator.of(context).pop();
+          AppDialogWidget.showError(
+            context,
+            errorMessage: result.message,
+          );
+      }
+    }
   }
 }

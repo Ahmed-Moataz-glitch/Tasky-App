@@ -5,6 +5,7 @@ import 'package:tasky/views/pages/home_page.dart';
 import 'package:tasky/views/pages/login_page.dart';
 import 'package:tasky/views/pages/onboarding_page.dart';
 import 'package:tasky/views/pages/register_page.dart';
+import 'package:tasky/views/widgets/app_routes.dart';
 // import 'package:tasky/views/pages/splash_screen.dart';
 
 void main() async {
@@ -28,12 +29,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       routes: {
-        '/onboarding': (context) => const OnboardingPage(),
-        '/login': (context) => const LoginPage(),
-        '/register': (context) => const RegisterPage(),
-        '/home': (context) => const HomePage(),
+        AppRoutes.onboardingPage: (context) => const OnboardingPage(),
+        AppRoutes.loginPage: (context) => const LoginPage(),
+        AppRoutes.registerPage: (context) => const RegisterPage(),
+        AppRoutes.homePage: (context) => const HomePage(),
       },
-      initialRoute: '/onboarding',
+      initialRoute: AppRoutes.onboardingPage,
     );
   }
 }

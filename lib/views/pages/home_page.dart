@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasky/views/widgets/app_assets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
         ),
         onPressed: (){},
         child: Image.asset(
-          'assets/icons/add_icon.png',
+          AppAssets.addIcon,
           width: 30,
           height: 30,
         ),
@@ -36,13 +37,13 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      'assets/icons/tasky_icon.png',
+                      AppAssets.taskyIcon,
                       width: 78,
                       height: 28,
                     ),
                     Spacer(),
                     Image.asset(
-                      'assets/icons/logout_icon.png',
+                      AppAssets.logoutIcon,
                       width: 24,
                       height: 24,
                     ),
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 85),
               Image.asset(
-                'assets/icons/home_icon.png',
+                AppAssets.homeIcon,
                 width: 352,
                 height: 238,
               ),

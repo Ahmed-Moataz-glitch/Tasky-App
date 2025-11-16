@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tasky/views/widgets/app_assets.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -128,19 +129,19 @@ class OnboardingPageItem {
 
 List<OnboardingPageItem> onboardingPages = [
   OnboardingPageItem(
-    imagePath: 'assets/icons/onboarding_icon1.png',
+    imagePath: AppAssets.onboardingIcon1,
     title: 'Manage your tasks',
     description:
         'You can easily manage all of your daily\ntasks in DoMe for free',
   ),
   OnboardingPageItem(
-    imagePath: 'assets/icons/onboarding_icon2.png',
+    imagePath: AppAssets.onboardingIcon2,
     title: 'Create daily routine',
     description:
         'In Tasky  you can create your personalized\nroutine to stay productive',
   ),
   OnboardingPageItem(
-    imagePath: 'assets/icons/onboarding_icon3.png',
+    imagePath: AppAssets.onboardingIcon3,
     title: 'Orgonaize your tasks',
     description:
         'You can organize your daily tasks by\nadding your tasks into separate categories',
