@@ -1,4 +1,5 @@
 class UserModel {
+  static const String collection = 'users';
   String? id;
   String? name;
   String? email;

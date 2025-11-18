@@ -6,8 +6,6 @@ import 'package:tasky/models/user_model.dart';
 import 'package:tasky/views/widgets/firebase_result.dart';
 
 abstract class FirebaseAuthentication {
-  static const String collection = 'users';
-
   static Future<FirebaseResult<UserModel>> register(UserModel user) async {
     try {
       final credential = await FirebaseAuth.instance
@@ -25,7 +23,7 @@ abstract class FirebaseAuthentication {
 
   static CollectionReference<UserModel> get _getCollection {
     return FirebaseFirestore.instance
-        .collection(FirebaseAuthentication.collection)
+        .collection(UserModel.collection)
         .withConverter<UserModel>(
           fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!),
           toFirestore: (userModel, _) => userModel.toJson(),

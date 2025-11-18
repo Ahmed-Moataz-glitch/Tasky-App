@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tasky/firebase_options.dart';
+import 'package:tasky/views/pages/edit_task_page.dart';
 import 'package:tasky/views/pages/home_page.dart';
 import 'package:tasky/views/pages/login_page.dart';
 import 'package:tasky/views/pages/onboarding_page.dart';
@@ -33,8 +34,10 @@ class MyApp extends StatelessWidget {
         AppRoutes.loginPage: (context) => const LoginPage(),
         AppRoutes.registerPage: (context) => const RegisterPage(),
         AppRoutes.homePage: (context) => const HomePage(),
+        AppRoutes.editTaskPage: (context) => const EditTaskPage(),
       },
-      initialRoute: AppRoutes.onboardingPage,
+      // initialRoute: AppRoutes.onboardingPage,
+      initialRoute: AppRoutes.homePage,
     );
   }
 }

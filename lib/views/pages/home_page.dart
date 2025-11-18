@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/views/widgets/app_assets.dart';
+import 'package:tasky/views/widgets/app_routes.dart';
+import 'package:tasky/views/widgets/modal_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var titleController = TextEditingController();
+  var descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
         ),
-        onPressed: (){},
+        onPressed: _addOnPressed,
         child: Image.asset(
           AppAssets.addIcon,
           width: 30,
@@ -32,7 +36,8 @@ class _HomePageState extends State<HomePage> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushReplacementNamed('/login');
+                  Navigator.of(context).pushNamed(AppRoutes.editTaskPage);
+                  // Navigator.of(context).pushReplacementNamed('/login');
                 },
                 child: Row(
                   children: [
@@ -87,6 +92,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  void _addOnPressed() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Color(0xffffffff),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      builder: (context) => ModalBottomSheet(),
     );
   }
 }
