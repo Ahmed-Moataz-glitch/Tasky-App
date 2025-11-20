@@ -1,4 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tasky/views/widgets/app_dialog_widget.dart';
+import 'package:tasky/views/widgets/app_routes.dart';
+import 'package:tasky/views/widgets/firebase_authentication.dart';
+import 'package:tasky/views/widgets/firebase_result.dart';
 import 'package:tasky/views/widgets/text_form_field_widget.dart';
 import 'package:tasky/views/widgets/validator.dart';
 
@@ -75,11 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () {
-                              if(formKey.currentState!.validate()) {
-                                Navigator.of(context).pushNamed('/home');
-                              }
-                            },
+                            onPressed: _loginOnPressed,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xff5F33E1),
                               padding: EdgeInsets.symmetric(
@@ -137,5 +140,28 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _loginOnPressed() async {
+    if(formKey.currentState!.validate()){
+      AppDialogWidget.showLoading(context);
+      final result = await FirebaseAuthentication.login(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      switch (result) {
+        case FirebaseSuccess<UserCredential>():
+          Navigator.of(context).pop();
+          emailController.clear();
+          passwordController.clear();
+          Navigator.of(context).pushReplacementNamed(AppRoutes.homePage);
+        case FirebaseError<UserCredential>():
+          Navigator.of(context).pop();
+          AppDialogWidget.showError(
+            context,
+            errorMessage: result.message,
+          );
+      }
+    }
   }
 }
