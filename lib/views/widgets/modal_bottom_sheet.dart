@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/views/widgets/app_assets.dart';
@@ -51,7 +53,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                   iconPath: AppAssets.dateIcon,
                   onPressed: () async {
                     selectedDate =
-                        await DatePicker.dateOnPressed(context) ?? selectedDate;
+                        await DatePickerWidget.dateOnPressed(context) ?? selectedDate;
                   },
                 ),
                 SizedBox(width: 12),
@@ -130,7 +132,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
   }
 }
 
-abstract class DatePicker {
+abstract class DatePickerWidget {
   static Future<DateTime?> dateOnPressed(BuildContext context) {
     return showDatePicker(
       context: context,

@@ -26,11 +26,12 @@ class TaskModel {
   );
 
   Map<String, dynamic> toJson() {
+    final normalDate = DateTime(date!.year, date!.month, date!.day);
     return {
       'id': id,
       'title': title,
       'description': description,
-      'date': date?.millisecondsSinceEpoch,
+      'date': normalDate.millisecondsSinceEpoch,
       'priority': priority,
       'isCompleted': isCompleted,
     };

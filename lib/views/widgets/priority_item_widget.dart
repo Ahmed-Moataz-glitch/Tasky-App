@@ -26,6 +26,7 @@ class PriorityItemWidget extends StatelessWidget {
               width: 24,
               height: 24,
               fit: BoxFit.contain,
+              color: isSelected ? Color(0xffffffff) : null,
             ),
             Text(
               '$index',
