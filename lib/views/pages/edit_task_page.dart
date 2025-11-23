@@ -17,7 +17,8 @@ class EditTaskPage extends StatefulWidget {
 class _EditTaskPageState extends State<EditTaskPage> {
   DateTime selectedDate = DateTime.now();
   int selectedPriority = 1;
-  bool isDefault = true;
+  bool isDateDefault = true;
+  bool isPriorityDefault = true;
   @override
   Widget build(BuildContext context) {
     var task = ModalRoute.of(context)!.settings.arguments as TaskModel;
@@ -121,7 +122,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                       selectedDate =
                           await DatePickerWidget.dateOnPressed(context) ??
                           task.date!;
-                      isDefault = false;
+                      isDateDefault = false;
                       setState(() {});
                     },
                     style: ElevatedButton.styleFrom(
@@ -135,9 +136,9 @@ class _EditTaskPageState extends State<EditTaskPage> {
                       ),
                     ),
                     child: Text(
-                      isDefault 
-                      ? '${task.date!.day}/${task.date!.month}/${task.date!.year}' 
-                      : '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                      isDateDefault
+                          ? '${task.date!.day}/${task.date!.month}/${task.date!.year}'
+                          : '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -171,7 +172,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                           },
                         ),
                       );
-                      isDefault = false;
+                      isPriorityDefault = false;
                       setState(() {});
                     },
                     style: ElevatedButton.styleFrom(
@@ -185,9 +186,9 @@ class _EditTaskPageState extends State<EditTaskPage> {
                       ),
                     ),
                     child: Text(
-                      isDefault
-                      ? '${task.priority ?? 1}'
-                      : '$selectedPriority',
+                      isPriorityDefault
+                          ? '${task.priority ?? 1}'
+                          : '$selectedPriority',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -224,7 +225,12 @@ class _EditTaskPageState extends State<EditTaskPage> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () async {
-                        selectedPriority = isDefault ? task.priority! : selectedPriority;
+                        selectedPriority = isPriorityDefault
+                            ? task.priority!
+                            : selectedPriority;
+                        selectedDate = isDateDefault
+                            ? task.date!
+                            : selectedDate;
                         await FirebaseTask.updateTask(
                           TaskModel(
                             id: task.id,
@@ -238,6 +244,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                         Navigator.of(context).pop();
                         // print(task.isCompleted);
                         // print(selectedPriority);
+                        // print(task.date);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff5F33E1),
