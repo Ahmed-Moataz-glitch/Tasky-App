@@ -41,7 +41,7 @@ abstract class FirebaseTask {
       return FirebaseError(e.toString());
     }
   }
-  
+
   static Future<FirebaseResult<void>> deleteTask(TaskModel task) async {
     try {
       final doc = _getCollection.doc(task.id);
@@ -55,9 +55,12 @@ abstract class FirebaseTask {
   static Future<FirebaseResult<List<TaskModel>>> getTasks(DateTime date) async {
     final normalDate = DateTime(date.year, date.month, date.day);
     try {
-      final querySnapshot = await _getCollection.where('date', isEqualTo: normalDate.millisecondsSinceEpoch).get();
-      final tasks =
-          querySnapshot.docs.map<TaskModel>((doc) => doc.data()).toList();
+      final querySnapshot = await _getCollection
+          .where('date', isEqualTo: normalDate.millisecondsSinceEpoch)
+          .get();
+      final tasks = querySnapshot.docs
+          .map<TaskModel>((doc) => doc.data())
+          .toList();
       return FirebaseSuccess(tasks);
     } catch (e) {
       return FirebaseError(e.toString());

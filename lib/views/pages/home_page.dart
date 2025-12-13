@@ -122,6 +122,11 @@ class _HomePageState extends State<HomePage> {
     switch (result) {
       case FirebaseSuccess<List<TaskModel>>():
         tasks = result.data ?? [];
+        tasks.sort((task1, task2) {
+          final task1Priority = task1.priority;
+          final task2Priority = task2.priority;
+          return task1Priority!.compareTo(task2Priority!);
+        });
       case FirebaseError<List<TaskModel>>():
         AppDialogWidget.showError(context, errorMessage: result.message);
     }
