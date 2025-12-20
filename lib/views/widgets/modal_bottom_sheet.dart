@@ -20,9 +20,16 @@ class ModalBottomSheet extends StatefulWidget {
 class _ModalBottomSheetState extends State<ModalBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
+    return AnimatedPadding(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+      padding: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 24,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 36,
+      ),
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -53,7 +60,8 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                   iconPath: AppAssets.dateIcon,
                   onPressed: () async {
                     selectedDate =
-                        await DatePickerWidget.dateOnPressed(context) ?? selectedDate;
+                        await DatePickerWidget.dateOnPressed(context) ??
+                        selectedDate;
                   },
                 ),
                 SizedBox(width: 12),
@@ -103,10 +111,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
         Navigator.of(context).pop();
       case FirebaseError<void>():
         Navigator.of(context).pop();
-        AppDialogWidget.showError(
-          context,
-          errorMessage: result.message,
-        );
+        AppDialogWidget.showError(context, errorMessage: result.message);
     }
   }
 

@@ -103,6 +103,7 @@ class _HomePageState extends State<HomePage> {
   void _addOnPressed() {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       backgroundColor: Color(0xffffffff),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(

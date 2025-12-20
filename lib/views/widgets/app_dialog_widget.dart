@@ -4,7 +4,7 @@ abstract class AppDialogWidget {
   static void showLoading(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false, 
+      barrierDismissible: false,
       builder: (context) => PopScope(
         canPop: false,
         child: AlertDialog(
@@ -32,7 +32,7 @@ abstract class AppDialogWidget {
   static void showError(BuildContext context, {required String errorMessage}) {
     showDialog(
       context: context,
-      barrierDismissible: false, 
+      barrierDismissible: false,
       builder: (context) => PopScope(
         canPop: true,
         child: AlertDialog(
@@ -54,7 +54,9 @@ abstract class AppDialogWidget {
           ),
           actions: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
               child: const Text(
                 'OK',
                 style: TextStyle(
