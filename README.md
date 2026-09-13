@@ -79,32 +79,68 @@ Whether you are tracking personal goals, managing work assignments, or schedulin
 
 ---
 
-## 📱 App Preview & Visuals
+## 📱 App Preview & Screenshots
+
+### 📲 Application Screenshots
 
 <div align="center">
   <table>
     <tr>
       <td align="center" width="33%">
-        <img src="assets/icons/onboarding_icon1.png" alt="Manage Tasks" width="220" /><br/>
+        <img src="Screenshot_1772059443.png" alt="Splash Screen" width="230" /><br/>
+        <b>Splash Screen</b><br/>
+        <i>Branded launch experience</i>
+      </td>
+      <td align="center" width="33%">
+        <img src="Screenshot_1772059530.png" alt="Login Screen" width="230" /><br/>
+        <b>Login Screen</b><br/>
+        <i>Secure Firebase authentication</i>
+      </td>
+      <td align="center" width="33%">
+        <img src="Screenshot_1772059534.png" alt="Register Screen" width="230" /><br/>
+        <b>Register Screen</b><br/>
+        <i>Validated user registration</i>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" width="33%">
+        <img src="Screenshot_1772059480.png" alt="Empty Dashboard" width="230" /><br/>
+        <b>Home (Empty State)</b><br/>
+        <i>Interactive calendar timeline & empty state</i>
+      </td>
+      <td align="center" width="33%">
+        <img src="Screenshot_1772059514.png" alt="Task List" width="230" /><br/>
+        <b>Task List</b><br/>
+        <i>Scheduled tasks & priority badges</i>
+      </td>
+      <td align="center" width="33%">
+        <img src="Screenshot_1772059520.png" alt="Task Details & Edit" width="230" /><br/>
+        <b>Task Details & Edit</b><br/>
+        <i>Modify task, schedule, priority & deletion</i>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### 🎨 Onboarding Experience & Visuals
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="33%">
+        <img src="assets/icons/onboarding_icon1.png" alt="Manage Tasks" width="200" /><br/>
         <b>Manage Your Tasks</b><br/>
         <i>Effortlessly keep track of daily responsibilities</i>
       </td>
       <td align="center" width="33%">
-        <img src="assets/icons/onboarding_icon2.png" alt="Daily Routine" width="220" /><br/>
+        <img src="assets/icons/onboarding_icon2.png" alt="Daily Routine" width="200" /><br/>
         <b>Create Daily Routines</b><br/>
         <i>Build productive habits and stay on schedule</i>
       </td>
       <td align="center" width="33%">
-        <img src="assets/icons/onboarding_icon3.png" alt="Organize Tasks" width="220" /><br/>
+        <img src="assets/icons/onboarding_icon3.png" alt="Organize Tasks" width="200" /><br/>
         <b>Prioritize & Plan</b><br/>
         <i>Structure work with granular 10-point priority</i>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3" align="center">
-        <img src="assets/icons/home_icon.png" alt="Dashboard Empty State" width="340" /><br/>
-        <b>Clean Dashboard Experience</b><br/>
-        <i>Friendly empty states and distraction-free workspace</i>
       </td>
     </tr>
   </table>
@@ -122,7 +158,8 @@ Tasky-App/
 ├── ios/                       # iOS native platform configuration & CocoaPods
 ├── assets/
 │   ├── icons/                 # App icons, action buttons, priority icons & illustrations
-│   └── images/                # Splash screens for Android 11, Android 12+ & iOS
+│   ├── images/                # Splash screens for Android 11, Android 12+ & iOS
+│   └── screenshots/           # Application screenshots for store & repository preview
 ├── lib/
 │   ├── models/                # Data models with JSON & Firestore converters
 │   │   ├── task_model.dart    # Task entity (id, title, description, date, priority, isCompleted)
