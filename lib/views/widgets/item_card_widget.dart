@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/views/widgets/app_assets.dart';
+import 'package:tasky/views/widgets/app_colors.dart';
 
 class ItemCardWidget extends StatelessWidget {
   const ItemCardWidget({super.key, required this.title, required this.date, required this.priority, required this.isCompleted, required this.onTap});
@@ -16,7 +17,7 @@ class ItemCardWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
         decoration: BoxDecoration(
-          border: Border.all(color: Color(0xff6E6A7C), width: 1),
+          border: Border.all(color: AppColors.secondary, width: 1.2),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -30,7 +31,7 @@ class ItemCardWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Color(0xff5F33E1),
+                      color: AppColors.primary,
                       width: 2,
                     ),
                   ),
@@ -40,7 +41,7 @@ class ItemCardWidget extends StatelessWidget {
                   height: 16,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isCompleted ? Color(0xff5F33E1) : null,
+                    color: isCompleted ? AppColors.primary : null,
                   ),
                 ),
               ],
@@ -53,8 +54,8 @@ class ItemCardWidget extends StatelessWidget {
                   title,
                   style: TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff24252C),
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.semiBlack,
                   ),
                 ),
                 Text(
@@ -62,7 +63,7 @@ class ItemCardWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xffAFAFAF),
+                    color: AppColors.secondary,
                   ),
                 ),
               ],
@@ -72,7 +73,7 @@ class ItemCardWidget extends StatelessWidget {
               margin: EdgeInsets.only(right: 10, top: 8),
               padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
-                border: Border.all(color: Color(0xff6E6A7C)),
+                border: Border.all(color: AppColors.secondary, width: 1.2),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Row(
@@ -89,7 +90,7 @@ class ItemCardWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xDE24252C),
+                      color: AppColors.semiBlack,
                     ),
                   ),
                 ],

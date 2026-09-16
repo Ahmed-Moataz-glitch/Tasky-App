@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
+import 'package:tasky/views/widgets/app_colors.dart';
 
 
 
@@ -30,10 +30,11 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
       style: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w400,
-        color: Colors.black,
+        color: AppColors.black,
         overflow: TextOverflow.ellipsis,
       ),
       obscureText: widget.obscureText,
@@ -43,14 +44,14 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
         hintStyle: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w400,
-          color: Colors.grey,
+          color: AppColors.grey,
           overflow: TextOverflow.ellipsis,
         ),
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(
                   widget.obscureText ? Icons.visibility_off : Icons.visibility,
-                  color: const Color(0xff454A4F),
+                  color: AppColors.visibilityIcon,
                   size: 24,
                 ),
                 onPressed: () {
@@ -63,24 +64,24 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
 
         contentPadding: const EdgeInsets.all(15),
         enabledBorder: outlineInputBorder(
-          color: Color(0xffBABABA),
+          color: AppColors.textFieldBorder,
           radius: 10,
-          width: 1,
+          width: 1.5,
         ),
         focusedBorder: outlineInputBorder(
-          color: Color(0xff5F33E1),
+          color: AppColors.primary,
           radius: 10,
-          width: 1,
+          width: 1.5,
         ),
         errorBorder: outlineInputBorder(
-          color: Colors.red,
+          color: AppColors.red,
           radius: 10,
-          width: 1,
+          width: 1.5,
         ),
         focusedErrorBorder: outlineInputBorder(
-          color: Colors.red,
+          color: AppColors.red,
           radius: 10,
-          width: 1,
+          width: 1.5,
         ),
       ),
       keyboardType: widget.keyboardType,

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/views/widgets/app_assets.dart';
+import 'package:tasky/views/widgets/app_colors.dart';
 import 'package:tasky/views/widgets/firebase_task.dart';
 import 'package:tasky/views/widgets/modal_bottom_sheet.dart';
 import 'package:tasky/views/widgets/priority_dialog.dart';
@@ -21,9 +22,10 @@ class _EditTaskPageState extends State<EditTaskPage> {
   bool isPriorityDefault = true;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     var task = ModalRoute.of(context)!.settings.arguments as TaskModel;
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -35,7 +37,10 @@ class _EditTaskPageState extends State<EditTaskPage> {
                 child: Container(
                   width: 32,
                   height: 32,
-                  decoration: BoxDecoration(color: Color(0x366E6A7C)),
+                  decoration: BoxDecoration(
+                    color: AppColors.closeIconBackground,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Image.asset(
                     AppAssets.closeIcon,
                     width: 24,
@@ -43,7 +48,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 48),
+              SizedBox(height: size.height * 0.06),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -62,7 +67,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Color(0xff5F33E1),
+                              color: AppColors.primary,
                               width: 2,
                             ),
                           ),
@@ -72,7 +77,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                           height: 16,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: task.isCompleted! ? Color(0xff5F33E1) : null,
+                            color: task.isCompleted! ? AppColors.primary : null,
                           ),
                         ),
                       ],
@@ -84,12 +89,12 @@ class _EditTaskPageState extends State<EditTaskPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xff24252C),
+                      color: AppColors.semiBlack,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 18),
+              SizedBox(height: size.height * 0.02),
               Row(
                 children: [
                   const SizedBox(width: 36),
@@ -98,22 +103,22 @@ class _EditTaskPageState extends State<EditTaskPage> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xff6E6A7C),
+                      color: AppColors.secondary,
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 28),
+              SizedBox(height: size.height * 0.03),
               Row(
                 children: [
                   Image.asset(AppAssets.dateIcon, width: 24, height: 24),
-                  SizedBox(width: 8),
+                  SizedBox(width: size.width * 0.02),
                   Text(
                     'Task Time :',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xff24252C),
+                      color: AppColors.semiBlack,
                     ),
                   ),
                   Spacer(),
@@ -142,7 +147,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xDE24252C),
+                        color: AppColors.semiBlack,
                       ),
                     ),
                   ),
@@ -158,7 +163,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xff24252C),
+                      color: AppColors.semiBlack,
                     ),
                   ),
                   Spacer(),
@@ -176,7 +181,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                       setState(() {});
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xffE0DFE3),
+                      backgroundColor: AppColors.editDateAndPriorityBackground,
                       padding: EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 8,
@@ -192,7 +197,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xDE24252C),
+                        color: AppColors.semiBlack,
                       ),
                     ),
                   ),
@@ -213,7 +218,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xffFF4949),
+                        color: AppColors.logout,
                       ),
                     ),
                   ],
@@ -247,7 +252,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                         // print(task.date);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff5F33E1),
+                        backgroundColor: AppColors.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -261,7 +266,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xffffffff),
+                          color: AppColors.white,
                         ),
                       ),
                     ),

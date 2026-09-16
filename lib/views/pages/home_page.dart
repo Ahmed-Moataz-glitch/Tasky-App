@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/views/widgets/app_assets.dart';
+import 'package:tasky/views/widgets/app_colors.dart';
 import 'package:tasky/views/widgets/app_dialog_widget.dart';
 import 'package:tasky/views/widgets/app_routes.dart';
 import 'package:tasky/views/widgets/firebase_result.dart';
@@ -32,13 +33,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: AppColors.white,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff24252C),
+        backgroundColor: AppColors.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: _addOnPressed,
-        child: Image.asset(AppAssets.addIcon, width: 30, height: 30),
+        child: Image.asset(
+          AppAssets.addIcon,
+          color: AppColors.white, 
+          width: 30, 
+          height: 30,
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -47,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Row(
                 children: [
-                  Image.asset(AppAssets.taskyIcon, width: 78, height: 28),
+                  Image.asset(AppAssets.taskyIcon, width: size.width * 0.2, height: size.height * 0.03),
                   const Spacer(),
                   GestureDetector(
                     onTap: () async {
@@ -63,13 +70,13 @@ class _HomePageState extends State<HomePage> {
                           width: 24,
                           height: 24,
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: size.width * 0.01),
                         Text(
                           'Log out',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xffFF4949),
+                            color: AppColors.logout,
                           ),
                         ),
                       ],
@@ -77,13 +84,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              SizedBox(height: 24),
+              SizedBox(height: size.height * 0.02),
               DatePicker(
                 DateTime.now(),
-                height: 100,
+                height: size.height * 0.11,
                 initialSelectedDate: DateTime.now(),
-                selectionColor: Color(0xff5F33E1),
-                selectedTextColor: Color(0xffffffff),
+                selectionColor: AppColors.primary,
+                selectedTextColor: AppColors.white,
                 onDateChange: (date) async {
                   setState(() {
                     _selectedValue = date;
@@ -91,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   });
                 },
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: size.height * 0.02),
               isLoading ? _loadingState() : _listOfTasks(),
             ],
           ),
@@ -103,7 +110,7 @@ class _HomePageState extends State<HomePage> {
   void _addOnPressed() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: AppColors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16),

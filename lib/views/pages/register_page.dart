@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tasky/models/user_model.dart';
+import 'package:tasky/views/widgets/app_colors.dart';
 import 'package:tasky/views/widgets/app_dialog_widget.dart';
 import 'package:tasky/views/widgets/firebase_authentication.dart';
 import 'package:tasky/views/widgets/firebase_result.dart';
@@ -16,112 +17,138 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  var usernameController = TextEditingController();
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var confirmPasswordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  late final TextEditingController fullNameController;
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+  late final TextEditingController confirmPasswordController;
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    fullNameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    fullNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+      backgroundColor: AppColors.white,
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          padding: EdgeInsets.only(
+            right: 24,
+            left: 24,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 100),
+              SizedBox(height: size.height * 0.08),
               Text(
                 'Register',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xDE24252C),
+                  color: AppColors.semiBlack,
                 ),
               ),
-              SizedBox(height: 24),
+              SizedBox(height: size.height * 0.06),
               Form(
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Username',
+                      'Full Name',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xDE24252C),
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.semiBlack,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: size.height * 0.015),
                     TextFormFieldWidget(
-                      controller: usernameController,
+                      controller: fullNameController,
                       validator: Validator.validateName,
-                      hintText: 'enter username...',
+                      hintText: 'enter full name...',
                       keyboardType: TextInputType.name,
                     ),
-                    SizedBox(height: 11),
+                    SizedBox(height: size.height * 0.03),
                     Text(
                       'Email',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xDE24252C),
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.semiBlack,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: size.height * 0.015),
                     TextFormFieldWidget(
                       controller: emailController,
                       validator: Validator.validateEmail,
                       hintText: 'enter email...',
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    SizedBox(height: 11),
+                    SizedBox(height: size.height * 0.03),
                     Text(
                       'Password',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xDE24252C),
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.semiBlack,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: size.height * 0.015),
                     TextFormFieldWidget(
                       controller: passwordController,
                       validator: Validator.validatePassword,
-                      hintText: 'Password...',
+                      hintText: 'create password...',
                       obscureText: true,
                       isPassword: true,
                     ),
-                    SizedBox(height: 11),
+                    SizedBox(height: size.height * 0.03),
                     Text(
                       'Confirm Password',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xDE24252C),
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.semiBlack,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: size.height * 0.015),
                     TextFormFieldWidget(
                       controller: confirmPasswordController,
                       validator: (value) => Validator.validateConfirmPassword(
                         value,
                         passwordController.text,
                       ),
-                      hintText: 'Password...',
+                      hintText: 'confirm password...',
                       obscureText: true,
                       isPassword: true,
                     ),
-                    SizedBox(height: 78),
+                    SizedBox(height: size.height * 0.04),
                     Row(
                       children: [
                         Expanded(
                           child: ElevatedButton(
                             onPressed: _registerOnPressed,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff5F33E1),
+                              backgroundColor: AppColors.primary,
                               padding: EdgeInsets.symmetric(
                                 horizontal: 24,
                                 vertical: 12,
@@ -135,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xffffffff),
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -145,16 +172,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 112),
+              SizedBox(height: size.height * 0.08),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Already have an account? ',
                     style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff6E6A7C),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.secondary,
                     ),
                   ),
                   GestureDetector(
@@ -164,9 +191,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text(
                       'Login',
                       style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xDE5F33E1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primary,
                       ),
                     ),
                   ),
@@ -181,10 +208,10 @@ class _RegisterPageState extends State<RegisterPage> {
   
   void _registerOnPressed() async {
     if (formKey.currentState!.validate()) {
-      AppDialogWidget.showLoading(context);
+      AppDialogWidget.showLoading(context, title: 'Registering...');
       final result = await FirebaseAuthentication.register(
         UserModel(
-          name: usernameController.text,
+          name: fullNameController.text,
           email: emailController.text,
           password: passwordController.text,
         ),
@@ -192,7 +219,7 @@ class _RegisterPageState extends State<RegisterPage> {
       switch(result){
         case FirebaseSuccess<UserModel>():
           Navigator.of(context).pop();
-          usernameController.clear();
+          fullNameController.clear();
           emailController.clear();
           passwordController.clear();
           confirmPasswordController.clear();

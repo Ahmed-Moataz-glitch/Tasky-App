@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class AppDialogWidget {
-  static void showLoading(BuildContext context) {
+  static void showLoading(BuildContext context, {required String title}) {
     showDialog(
       context: context,
       barrierDismissible: false, 
@@ -10,12 +10,12 @@ abstract class AppDialogWidget {
         child: AlertDialog(
           content: Row(
             spacing: 10,
-            children: const [
+            children: [
               CircularProgressIndicator.adaptive(
                 backgroundColor: Color(0xff5F33E1),
               ),
               Text(
-                'Loading...',
+                title,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,

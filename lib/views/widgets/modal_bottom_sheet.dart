@@ -88,7 +88,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
   }
 
   void _sendOnPressed() async {
-    AppDialogWidget.showLoading(context);
+    AppDialogWidget.showLoading(context, title: 'Adding task...');
     final result = await FirebaseTask.addTask(
       TaskModel(
         title: titleController.text,

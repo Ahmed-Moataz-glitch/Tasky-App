@@ -2,12 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tasky/firebase_options.dart';
 import 'package:tasky/views/pages/edit_task_page.dart';
 import 'package:tasky/views/pages/home_page.dart';
 import 'package:tasky/views/pages/login_page.dart';
 import 'package:tasky/views/pages/onboarding_page.dart';
 import 'package:tasky/views/pages/register_page.dart';
+import 'package:tasky/views/widgets/app_colors.dart';
 import 'package:tasky/views/widgets/app_routes.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:tasky/views/pages/splash_screen.dart';
@@ -21,6 +23,13 @@ Future<void> main() async {
   );
   // FirebaseCrashlytics.instance.crash();
   await handleNotification();
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: AppColors.white, // Make status bar transparent
+      statusBarIconBrightness: Brightness.dark, // Dark icons (for Android)
+      statusBarBrightness: Brightness.light, // Dark icons (for iOS)
+    ),
+  );
   runApp(const MyApp());
 }
 
@@ -104,7 +113,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Tasky',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),

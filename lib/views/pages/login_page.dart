@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tasky/views/widgets/app_colors.dart';
 import 'package:tasky/views/widgets/app_dialog_widget.dart';
 import 'package:tasky/views/widgets/app_routes.dart';
 import 'package:tasky/views/widgets/firebase_authentication.dart';
@@ -17,29 +18,52 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+      backgroundColor: AppColors.white,
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          padding: EdgeInsets.only(
+            right: 24,
+            left: 24,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 120),
+              SizedBox(height: size.height * 0.08),
               Text(
                 'Login',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xDE24252C),
+                  color: AppColors.semiBlack,
                 ),
               ),
-              SizedBox(height: 54),
+              SizedBox(height: size.height * 0.06),
               Form(
                 key: formKey,
                 child: Column(
@@ -49,27 +73,27 @@ class _LoginPageState extends State<LoginPage> {
                       'Email',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xDE24252C),
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.semiBlack,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: size.height * 0.015),
                     TextFormFieldWidget(
                       controller: emailController,
                       validator: Validator.validateEmail,
                       hintText: 'enter email...',
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    SizedBox(height: 26),
+                    SizedBox(height: size.height * 0.03),
                     Text(
                       'Password',
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xDE24252C),
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.semiBlack,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    SizedBox(height: size.height * 0.015),
                     TextFormFieldWidget(
                       controller: passwordController,
                       validator: Validator.validatePassword,
@@ -77,14 +101,14 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: true,
                       isPassword: true,
                     ),
-                    SizedBox(height: 70),
+                    SizedBox(height: size.height * 0.04),
                     Row(
                       children: [
                         Expanded(
                           child: ElevatedButton(
                             onPressed: _loginOnPressed,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff5F33E1),
+                              backgroundColor: AppColors.primary,
                               padding: EdgeInsets.symmetric(
                                 horizontal: 24,
                                 vertical: 12,
@@ -98,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xffffffff),
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -108,16 +132,16 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 245),
+              SizedBox(height: size.height * 0.35),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Don’t have an account? ',
                     style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff6E6A7C),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.secondary,
                     ),
                   ),
                   GestureDetector(
@@ -127,9 +151,9 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       'Register',
                       style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xDE5F33E1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primary,
                       ),
                     ),
                   ),
@@ -144,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _loginOnPressed() async {
     if(formKey.currentState!.validate()){
-      AppDialogWidget.showLoading(context);
+      AppDialogWidget.showLoading(context, title: 'Logging in...');
       final result = await FirebaseAuthentication.login(
         email: emailController.text,
         password: passwordController.text,
