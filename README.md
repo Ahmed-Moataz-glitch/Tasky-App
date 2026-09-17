@@ -23,7 +23,7 @@
 
   <p align="center">
     <a href="#-key-features">Key Features</a> •
-    <a href="#-app-preview--screenshots">App Preview</a> •
+    <a href="#-app-demo--preview">App Demo & Preview</a> •
     <a href="#-architecture--structure">Architecture</a> •
     <a href="#-firestore-database-schema">Database Schema</a> •
     <a href="#-tech-stack--dependencies">Tech Stack</a> •
@@ -79,7 +79,19 @@ Whether you are tracking personal goals, managing work assignments, or schedulin
 
 ---
 
-## 📱 App Preview & Screenshots
+## 📱 App Demo & Preview
+
+### 🎬 Video Walkthrough
+
+<div align="center">
+  <video src="tasky.mp4" width="320" controls="controls" muted="muted">
+    Your browser does not support the video tag.
+  </video>
+
+  <p>
+    🎥 <b><a href="tasky.mp4">Click here to watch / download the app demo video (tasky.mp4)</a></b>
+  </p>
+</div>
 
 ### 📲 Application Screenshots
 
@@ -157,9 +169,9 @@ Tasky-App/
 ├── android/                   # Android native platform configuration & Gradle scripts
 ├── ios/                       # iOS native platform configuration & CocoaPods
 ├── assets/
+│   ├── demo/                  # App demonstration video (tasky.mp4)
 │   ├── icons/                 # App icons, action buttons, priority icons & illustrations
-│   ├── images/                # Splash screens for Android 11, Android 12+ & iOS
-│   └── screenshots/           # Application screenshots for store & repository preview
+│   └── images/                # Splash screens for Android 11, Android 12+ & iOS
 ├── lib/
 │   ├── models/                # Data models with JSON & Firestore converters
 │   │   ├── task_model.dart    # Task entity (id, title, description, date, priority, isCompleted)
